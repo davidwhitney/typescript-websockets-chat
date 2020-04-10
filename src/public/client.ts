@@ -12,7 +12,7 @@ const logToConsole = (ourClass: ACoolClass) => {
 logToConsole(instance); // Works fine
 // logToConsole("something else"); // Fails at compile time!
 
-var ws = new WebSocket("wss://meteor-loving-gargoyleosaurus.glitch.me/echo");
+var ws = new WebSocket("wss://meteor-loving-gargoyleosaurus.glitch.me:8080/");
 				
  ws.onopen = function() {
     // Web Socket is connected, send data using send()
