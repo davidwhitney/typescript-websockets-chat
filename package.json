@@ -10,18 +10,20 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "@types/ws": "^7.2.3",
     "express": "latest",
-    "ts-node": "latest",
-    "tsconfig-paths": "latest",
-    "typescript": "latest",
-    "ts-loader": "latest",
-    "webpack": "latest",
-    "webpack-cli": "latest",
     "jest": "latest",
     "jest-cli": "latest",
     "ts-jest": "latest",
-    "@types/node": "latest",
-    "@types/jest": "latest"
+    "ts-loader": "latest",
+    "ts-node": "latest",
+    "tsconfig-paths": "latest",
+    "typescript": "latest",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "ws": "^7.2.3"
   },
   "engines": {
     "node": "12.x"
