@@ -95,7 +95,7 @@ var lib =
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nconsole.log(\"Hello from client side TypeScript\");\nvar ws = new WebSocket(\"wss://meteor-loving-gargoyleosaurus.glitch.me/\");\nws.onopen = function () {\n    ws.send(\"Message to send\");\n    console.log(\"Message is sent...\");\n};\nws.onmessage = function (evt) {\n    var received_msg = evt.data;\n    console.log(\"Message is received...\");\n};\nws.onclose = function () {\n    // websocket is closed.\n    console.log(\"Connection is closed...\");\n};\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
+eval("\nconsole.log(\"Hello from client side TypeScript\");\nvar ws = new WebSocket(\"wss://meteor-loving-gargoyleosaurus.glitch.me/\");\nvar sendMessageButton = document.getElementById(\"send\");\nvar nameTextbox = document.getElementById(\"name\");\nvar messageTextbox = document.getElementById(\"message\");\nsendMessageButton.addEventListener(\"click\", sendMessage);\nws.onopen = function () {\n    sendMessageButton.disabled = false;\n    ws.send(\"Message to send\");\n    console.log(\"Message is sent...\");\n};\nws.onmessage = function (evt) {\n    var received_msg = evt.data;\n    console.log(\"Message is received...\");\n};\nws.onclose = function () {\n    // websocket is closed.\n    console.log(\"Connection is closed...\");\n};\nvar sendMessage = function () {\n    console.log(\"Sending\");\n    var payload = {\n        name: nameTextbox.value,\n        message: messageTextbox.value\n    };\n    ws.send(payload);\n    messageTextbox.value = \"\";\n    return false;\n};\n\n\n//# sourceURL=webpack://lib/./src/public/client.ts?");
 
 /***/ })
 

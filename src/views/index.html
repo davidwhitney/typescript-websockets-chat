@@ -14,13 +14,18 @@
   <body>
     <header>
       <h1>
-        I'm running TypeScript!
+        Chat
       </h1>
     </header>
 
     <main>
-      <p class="bold">Oh hi</p>
-    </main>
+      <form>        
+        <textarea id="messages" class="message-box"></textarea>
+        <input id="name" type="text" value="Your name here" />
+        <input id="message" type="text" value="" />
+        <input id="send" type="button" value="Send" disabled />
+      </form>
+  </main>
 
     <footer>
       Made with <a href="https://glitch.com">Glitch</a>!

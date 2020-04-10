@@ -29,7 +29,6 @@ form {
   background-color: cyan;
   display: inline-block;
   width: 100%;
-  max-width: 340px;
   border-radius: 3px;
 }
 
@@ -68,4 +67,9 @@ footer {
   margin-top: 50px;
   padding-top: 25px;
   border-top: 1px solid lightgrey;
+}
+
+.message-box {
+  width: 100%;
+  height: 80vh;
 }
