@@ -12,25 +12,15 @@ app.get("/", (request, response)  => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws: WebSocket) => {
-
     ws.on('message', (message: string) => {
-        console.log('received: %s', message);
-        //ws.send(`Hello, you sent -> ${message}`);
-      
         wss.clients.forEach(client => {
-            //if (client != ws) {
-            client.send(message);
-            //}    
+          client.send(message);
         });      
-      
     });
-
-    //ws.send('Hi there, I am a WebSocket server');
 });
 
 const listener = server.listen(process.env.PORT, function() {

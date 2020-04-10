@@ -1,9 +1,7 @@
 
-console.log("Hello from client side TypeScript");
+var ws = new WebSocket("wss://" + window.location.host);
 
-var ws = new WebSocket("wss://meteor-loving-gargoyleosaurus.glitch.me/");
-
-const chatForm = document.getElementById("chatui") as HTMLElement;
+const chatForm = document.getElementById("chatui") as HTMLInputElement;
 const sendMessageButton = document.getElementById("send") as HTMLInputElement;
 const nameTextbox = document.getElementById("name") as HTMLInputElement;
 const messageTextbox = document.getElementById("message") as HTMLInputElement;
@@ -19,7 +17,7 @@ const chatUi = [ chatForm, sendMessageButton, nameTextbox, messageTextbox, messa
 
  ws.onmessage = function (evt) { 
    const unpacked = JSON.parse(evt.data);
-   messagesLog.value += unpacked.message;   
+   messagesLog.value += `${unpacked.name}: ${unpacked.message}\r\n\r\n`;
  };
 
  ws.onclose = function() {
@@ -28,9 +26,7 @@ const chatUi = [ chatForm, sendMessageButton, nameTextbox, messageTextbox, messa
    }
  };
 
-
-const sendMessage = () => {
-  console.log("Sending");
+const sendMessage = (event) => {
   const payload = {
     name: nameTextbox.value,
     message: messageTextbox.value
@@ -40,8 +36,7 @@ const sendMessage = () => {
   
   messageTextbox.value = "";
   messageTextbox.focus();
-  return false;
+  event.preventDefault();
 };
 
-chatForm.addEventListener("onsubmit", sendMessage);
-//sendMessageButton.addEventListener("click", sendMessage);
+chatForm.addEventListener("submit", sendMessage);
