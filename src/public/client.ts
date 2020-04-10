@@ -3,26 +3,29 @@ console.log("Hello from client side TypeScript");
 
 var ws = new WebSocket("wss://meteor-loving-gargoyleosaurus.glitch.me/");
 
-const sendMessageButton = document.getElementById("send");
-const nameTextbox = document.getElementById("name");
-const messageTextbox = document.getElementById("message");
-sendMessageButton.addEventListener("click", sendMessage);
-
+const chatForm = document.getElementById("chatui") as HTMLElement;
+const sendMessageButton = document.getElementById("send") as HTMLInputElement;
+const nameTextbox = document.getElementById("name") as HTMLInputElement;
+const messageTextbox = document.getElementById("message") as HTMLInputElement;
+const messagesLog = document.getElementById("messages") as HTMLInputElement;
+const chatUi = [ chatForm, sendMessageButton, nameTextbox, messageTextbox, messagesLog ];
 
  ws.onopen = function() {
-   sendMessageButton.disabled = false;
-    ws.send("Message to send");
-    console.log("Message is sent...");
+   for (let ui of chatUi) {
+     ui.disabled = false;
+   }
+   messageTextbox.focus();
  };
 
  ws.onmessage = function (evt) { 
-    var received_msg = evt.data;
-    console.log("Message is received...");
+   const unpacked = JSON.parse(evt.data);
+   messagesLog.value += unpacked.message;   
  };
 
  ws.onclose = function() {
-    // websocket is closed.
-    console.log("Connection is closed..."); 
+   for (let ui of chatUi) {
+     ui.disabled = true;
+   }
  };
 
 
@@ -33,9 +36,12 @@ const sendMessage = () => {
     message: messageTextbox.value
   };
   
-  ws.send(payload);
+  ws.send(JSON.stringify(payload));
   
   messageTextbox.value = "";
-  
+  messageTextbox.focus();
   return false;
 };
+
+chatForm.addEventListener("onsubmit", sendMessage);
+//sendMessageButton.addEventListener("click", sendMessage);
