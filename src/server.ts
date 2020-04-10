@@ -7,7 +7,7 @@ const app = express();
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-console.log(wss);
+
 wss.on('connection', (ws: WebSocket) => {
 
     ws.on('message', (message: string) => {
